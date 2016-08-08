@@ -158,6 +158,9 @@ def validate_email(email, check_mx=False, verify=False, debug=False, smtp_timeou
                     if status == 250:
                         smtp.quit()
                         return True
+                    elif "does not exist" not in _:
+                        smtp.quit()
+                        return True
                     if debug:
                         logger.debug(u'%s answer: %s - %s', mx[1], status, _)
                     smtp.quit()
